@@ -1,0 +1,6 @@
+# Best Christmas Movie Genre
+
+Overall the best rated Christmas movie genre is documentaries. The table below shows the best Christmas movie genres in order from highest average rating to the lowest, excluding genres with less than 50 relevant movies.
+
+
+![Table of mean rating per genre](tabs/report_table_picture.png){width="161"}

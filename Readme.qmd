@@ -1,0 +1,80 @@
+# Important
+
+```{r}
+pacman::p_load(targets)
+```
+
+Make sure you have Java installed with the JDK for the xlsx package (I needed it on Linux at least)
+
+I stuffed up and didn't remove movies with less than 10 reviews initially, this modified some of the analysis I've not removed/changed the entries in here though as it's append only. Ask Jono about what to do normally here.
+
+# 6/3/24
+
+Created targets setup like in workshop 2 with folders inspired by workshop 1
+
+Will have report which shows key findings
+
+Basic EDA with the following results
+
+-   I will remove movies without a genre (obviously)
+
+-   I will NOT be removing movies that have a limited number of ratings. The reason is that the majority of movies don't have many ratings and I want to keep as many data points as possible. If this wasn't such low stakes (i.e. not choosing a movie) then I'd consider it or at least running two (or more) lots of analysis
+
+-   I will not be removing movies without a run time as it doesn't seem necessary
+
+-   There are no other missing sections
+
+After a look at the factors/levels of genres I've decided not to force each movie to have one genre and rather to allow for multiple. The reason is that picking which genre is the "main" one is not something I personally can objectively do and I'm worried about the influence of high rated movies skewing the genres they were removed from. Again a deeper analysis could be done to see if this is actually an issue, but I've decided to keep them.
+
+# 8/3/24
+
+Have split up the movies in r. I've just created a new copy of the row for each genre. Maybe Jono can tell me if there's a better way?
+
+Have decided to keep the holiday/Kwanzaa/Hanukkah movies in as "Christmas movies" is often used to mean holiday movies in general and these movies likely have the same "happy spirit/vibes". Additionally, I hypothesis that there's so few of them that the analysis will be unlikely to be skewed by their inclusion as there's 12 Kwanzaa/Hanukkah movies and 330 holiday movies total.
+
+Also noticed that some videos and tvmovies are very short. The British film institute says 40 minutes so that's what I'll go with. This removes the limited number of movies with no run time (Again this would be investigated if a higher stakes outcome was sought).
+
+Remembered to check how many movies in each genre, removed genres with less than 50 movies since we don't lose to many movies but it makes it all more realistic.
+
+I've also created summary statistics, graphs and boxplots to show the relationships between the genres, it looks like
+
+```{r}
+tar_load(ratings_plot)
+tar_load(ratings_boxplot)
+tar_load(ratings_table)
+
+ratings_plot
+ratings_boxplot
+ratings_table
+```
+
+But an anova will be done to confirm
+
+The plot also shows that the ratings are all very roughly normal with the occasional slight skew but nothing drastic or particularly bi modal.
+
+# 10/3/24
+
+An anova was performed with assumption checking
+
+The results were in
+
+```{r}
+tar_load(anova_assumptions)
+anova_assumptions
+
+tar_load(anova_report)
+anova_report
+```
+
+The assumptions checking looks not great initially but then we remember that the straight lines are due to basic linear regression with only a categorical variable as the dependent one and it's ok. QQ looks good.
+
+All things considered based on the anova, there's a statistically significant difference in the means and so a table of genres sorted by means can be created and saved so the image can be loaded in the report (Avoids r code in the report but maybe there's a better way). Clearly documentaries are the best genre (however note that if genres with more less than 100 movies are excluded than documentaries and musicals are two highly rated removals)
+
+# 17/03/24
+
+Rstudio went weird again. Recreated project and copy pasted code. Seems to be fine. Will check into git and push to private github if I've got the time and energy. Maybe check that Jono has java installed with the JDK as it's needed for reading in the excel spreadsheet.
+
+# 18/03/24
+
+Fix some Anvoa stuff and tidy a few things up. Way more tidying needed but covid brain isn't letting me. Just excluded movies with less than 10 reviews. Still statistically significant and assumptions for anova still hold (Well, enough). 
+ 
